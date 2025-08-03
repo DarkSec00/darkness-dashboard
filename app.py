@@ -19,7 +19,7 @@ def authenticate():
     logging.info(f"Authorized request from {request.remote_addr}")
 
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
 
 @app.route('/run-osint')

@@ -1,27 +1,22 @@
-const input = document.getElementById('terminal-input-right');
-const terminal = document.getElementById('output-right');
+document.addEventListener("DOMContentLoaded", () => {
+  const output = document.getElementById("output-right");
+  const input = document.getElementById("terminal-input-right");
 
-function appendOutput(text) {
-  terminal.innerHTML += `<div>> ${text}</div>`;
-  terminal.scrollTop = terminal.scrollHeight;
-}
+  const write = (text) => {
+    const line = document.createElement("div");
+    line.textContent = text;
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+  };
 
-input.addEventListener('keydown', async (e) => {
-  if (e.key === 'Enter') {
-    const command = input.value.trim();
-    input.value = '';
-    appendOutput(command);
+  write("OSINT Tools Terminal Ready.");
 
-    try {
-      const response = await fetch('/run-right', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ command })
-      });
-      const result = await response.json();
-      appendOutput(result.output);
-    } catch (err) {
-      appendOutput('[Error] Could not reach OSINT tools backend.');
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const cmd = input.value.trim();
+      write("> " + cmd);
+      input.value = "";
+      write(`[mock] Executing OSINT command: '${cmd}'`);
     }
-  }
+  });
 });

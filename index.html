@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Darkness Security Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Darkness Security Terminal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <style>
     body {
       background: #000;
@@ -43,9 +44,29 @@
       border-top: 1px solid #0f0;
       padding: 10px;
     }
+
+    button {
+      background-color: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 8px 16px;
+      font-family: "Courier New", monospace;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    #outputArea {
+      margin-top: 10px;
+      border: 1px dashed #0f0;
+      padding: 10px;
+      background-color: #000;
+      color: #0f0;
+      font-family: monospace;
+    }
   </style>
 </head>
 <body>
+
   <!-- Left Terminal: WiFi -->
   <div class="terminal">
     <div id="output-left" class="output"></div>
@@ -64,30 +85,30 @@
     <input id="terminal-input-right" type="text" placeholder="OSINT Tools...">
   </div>
 
+  <!-- Buttons -->
+  <div style="position: absolute; bottom: 10px; left: 10px; right: 10px;">
+    <button onclick="runScript('/run/osint')">Run OSINT Tools</button>
+    <button onclick="runScript('/run/wifi')">Run WiFi Tools</button>
+    <pre id="outputArea"></pre>
+  </div>
+
   <!-- Script Hooks -->
-  <script src="main-left.js"></script>
-  <script src="main.js"></script>
-  <script src="main-right.js"></script>
-  
-  <button onclick="runScript('/run/osint')">Run OSINT Tools</button>
-<button onclick="runScript('/run/wifi')">Run WiFi Tools</button>
+  <script src="{{ url_for('static', filename='main-left.js') }}"></script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+  <script src="{{ url_for('static', filename='main-right.js') }}"></script>
 
-<pre id="outputArea"></pre>
-
-<script>
-  function runScript(endpoint) {
-    fetch(endpoint, { method: 'POST' })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('outputArea').textContent = data.output || data.error;
-      })
-      .catch(err => {
-        document.getElementById('outputArea').textContent = 'Error running script.';
-        console.error(err);
-      });
-  }
-</script>
-
-
+  <script>
+    function runScript(endpoint) {
+      fetch(endpoint, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('outputArea').textContent = data.output || data.error;
+        })
+        .catch(err => {
+          document.getElementById('outputArea').textContent = 'Error running script.';
+          console.error(err);
+        });
+    }
+  </script>
 </body>
 </html>

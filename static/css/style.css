@@ -1,0 +1,19 @@
+body {
+    background-color: #0d0d0d;
+    color: #33ff33;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 20px;
+}
+
+h1 {
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.card {
+    background-color: #1a1a1a;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #33ff33;
+    border-radius: 5px;
+}

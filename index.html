@@ -11,16 +11,30 @@
       font-family: "Courier New", monospace;
       margin: 0;
       padding: 20px;
+      display: flex;
+      gap: 10px;
+      height: 100vh;
+      box-sizing: border-box;
     }
-    #terminal {
+
+    .terminal {
       background-color: #111;
       border: 1px solid #0f0;
-      padding: 20px;
-      height: 80vh;
+      padding: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .output {
+      flex: 1;
       overflow-y: auto;
       white-space: pre-wrap;
+      margin-bottom: 10px;
     }
-    #terminal-input {
+
+    input {
       width: 100%;
       background: #000;
       border: none;
@@ -29,13 +43,32 @@
       font-family: "Courier New", monospace;
       font-size: 16px;
       padding: 10px;
-      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div id="terminal"></div>
-  <input id="terminal-input" type="text" placeholder="Enter command...">
+
+  <!-- Left Terminal (WiFi Tools) -->
+  <div class="terminal">
+    <div id="output-left" class="output"></div>
+    <input id="terminal-input-left" type="text" placeholder="WiFi Tools...">
+  </div>
+
+  <!-- Center Terminal (Main Kali Container) -->
+  <div class="terminal">
+    <div id="terminal" class="output"></div>
+    <input id="terminal-input" type="text" placeholder="Main Terminal...">
+  </div>
+
+  <!-- Right Terminal (OSINT Tools) -->
+  <div class="terminal">
+    <div id="output-right" class="output"></div>
+    <input id="terminal-input-right" type="text" placeholder="OSINT Tools...">
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="main-left.js"></script>
   <script src="main.js"></script>
+  <script src="main-right.js"></script>
 </body>
 </html>

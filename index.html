@@ -68,5 +68,26 @@
   <script src="main-left.js"></script>
   <script src="main.js"></script>
   <script src="main-right.js"></script>
+  
+  <button onclick="runScript('/run/osint')">Run OSINT Tools</button>
+<button onclick="runScript('/run/wifi')">Run WiFi Tools</button>
+
+<pre id="outputArea"></pre>
+
+<script>
+  function runScript(endpoint) {
+    fetch(endpoint, { method: 'POST' })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('outputArea').textContent = data.output || data.error;
+      })
+      .catch(err => {
+        document.getElementById('outputArea').textContent = 'Error running script.';
+        console.error(err);
+      });
+  }
+</script>
+
+
 </body>
 </html>

@@ -1,56 +1,60 @@
-from flask import Flask, request, jsonify, render_template, abort
+from flask import Flask, request, jsonify, abort
+from flask_cors import CORS
 import os
 import subprocess
 import logging
+import secrets
 
 app = Flask(__name__)
+CORS(app)
 
-AUTH_TOKEN = "800f977c814917440261045111d7af8f"
-BASE_DIR = os.path.join(os.path.dirname(__file__), "scripts")
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-logging.basicConfig(filename='flask_api.log', level=logging.INFO)
+LOG_FILE = os.path.join(BASE_DIR, "flask_api.log")
+logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+
+AUTH_TOKEN = os.getenv("AUTH_TOKEN")
+
+if not AUTH_TOKEN:
+    AUTH_TOKEN = secrets.token_hex(16)
+    print(f"[INFO] No auth token set in environment. Generated token: {AUTH_TOKEN}")
+    print("Please set this token in your environment variable AUTH_TOKEN for future runs.")
 
 @app.before_request
 def authenticate():
     token = request.args.get('token')
     if token != AUTH_TOKEN:
-        logging.warning(f"Unauthorized access attempt from {request.remote_addr}")
+        logging.warning(f"Unauthorized access attempt from IP {request.remote_addr}")
         abort(403)
-    logging.info(f"Authorized request from {request.remote_addr}")
 
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    logging.info("Accessed root endpoint")
+    return jsonify({"message": "API active", "status": "online"})
 
-@app.route('/run-osint')
-def run_osint():
-    script_path = os.path.join(BASE_DIR, 'osint_menu.sh')
-    if not os.path.isfile(script_path):
-        return jsonify({"error": "Script not found"}), 404
-    try:
-        output = subprocess.check_output(['bash', script_path], stderr=subprocess.STDOUT)
-        return jsonify({"output": output.decode('utf-8')})
-    except subprocess.CalledProcessError as e:
-        return jsonify({"error": e.output.decode('utf-8')}), 500
-
-@app.route('/run-wifi')
-def run_wifi():
-    script_path = os.path.join(BASE_DIR, 'wifi_tools_menu.sh')
-    if not os.path.isfile(script_path):
-        return jsonify({"error": "Script not found"}), 404
-    try:
-        output = subprocess.check_output(['bash', script_path], stderr=subprocess.STDOUT)
-        return jsonify({"output": output.decode('utf-8')})
-    except subprocess.CalledProcessError as e:
-        return jsonify({"error": e.output.decode('utf-8')}), 500
-
-@app.route('/status')
+@app.route("/status")
 def status():
-    return jsonify({
-        "system_name": "Whispering_Shadow",
-        "status": "✅ All modules operational",
-        "last_updated": "2025-06-29 14:41 CDT"
-    })
+    logging.info("Status check requested")
+    return jsonify({"system": "Server", "status": "operational"})
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+@app.route("/run-cmd", methods=["POST"])
+def run_cmd():
+    data = request.get_json()
+    cmd = data.get("command")
+    if not cmd:
+        logging.error("No command provided")
+        return jsonify({"error": "No command provided"}), 400
+
+    try:
+        output = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT, timeout=10)
+        logging.info(f"Executed command: {cmd}")
+        return jsonify({"output": output.decode("utf-8")})
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Command error: {e.output.decode('utf-8')}")
+        return jsonify({"error": e.output.decode("utf-8")}), 500
+    except subprocess.TimeoutExpired:
+        logging.error("Command timeout")
+        return jsonify({"error": "Command timed out"}), 504
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=550)

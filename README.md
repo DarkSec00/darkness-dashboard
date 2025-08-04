@@ -1,36 +1,14 @@
-# Darkness Dashboard
+# 🌑 Darkness Dashboard
 
-A self-hosted interactive security dashboard to manage tools, logs, and security alerts for personal or corporate environments.
-
----
-
-## ⚠️ Legal Disclaimer
-
-This project is provided for **educational and ethical purposes only**. The Darkness Dashboard must not be used to engage in unauthorized access, intrusion, or malicious activity.
-
-You are solely responsible for how you use this tool. By using or modifying this dashboard, you agree to:
-
-- Use it only within **your own environments** or with **explicit permission**.
-- Abide by all **local, federal, and international cybersecurity laws**.
-- Accept that the authors assume **no liability** for misuse, damages, or legal consequences.
+A tactical OSINT, network, and security dashboard for cyber professionals and red teamers. This self-hosted tool empowers users to run advanced offensive and defensive tools in a web-based interface.
 
 ---
 
-## 🔧 Installation (Recommended: Self-Hosted)
+## 🔧 Installation Guide
 
-Each user should install their own copy on their own server for privacy and legal separation.
+Tested on: Ubuntu 22.04+ / Debian-based distros
 
-### Requirements
-
-- Python 3.8+
-- pip
-- nginx (for reverse proxy + SSL)
-- Git
-- A domain or subdomain (e.g., `dashboard.yoursite.com`)
-- SSL (recommended: [Let's Encrypt + Certbot](https://certbot
-## 🧰 Install Requirements
-
-Make sure you have Python 3 installed.
+### 1. Install system dependencies
 
 ```bash
-pip install -r requirements.txt
+sudo apt update && sudo apt install -y python3 python3-pip python3-venv nginx git

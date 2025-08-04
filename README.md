@@ -28,3 +28,9 @@ Each user should install their own copy on their own server for privacy and lega
 - Git
 - A domain or subdomain (e.g., `dashboard.yoursite.com`)
 - SSL (recommended: [Let's Encrypt + Certbot](https://certbot
+## 🧰 Install Requirements
+
+Make sure you have Python 3 installed.
+
+```bash
+pip install -r requirements.txt

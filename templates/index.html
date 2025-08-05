@@ -4,31 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Darkness Security Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="static/css/style.css" />
 </head>
 <body>
-    <header class="header-bar">
-        <div class="logo">🌑</div>
-        <h1 class="title">Darkness Security Dashboard</h1>
+    <header>
+        <h1>☠️ Darkness Security Dashboard ☠️</h1>
+        <p>Welcome, Agent of Darkness.</p>
     </header>
 
-    <main class="dashboard-container">
+    <main>
         <section id="left-terminal" class="terminal-panel">
-            <!-- Left terminal output goes here -->
-        </section>
-
-        <section id="center-dashboard" class="dashboard-panel">
-            <!-- Main dashboard content / charts / info -->
-            <h2>Welcome, Agent of Darkness</h2>
-            <p>Your tactical OSINT and security control hub.</p>
+            <h2>WiFi Tools Terminal</h2>
+            <div id="output-left" class="terminal-output"></div>
+            <input id="terminal-input-left" class="terminal-input" type="text" autocomplete="off" placeholder="Enter command..." />
         </section>
 
         <section id="right-terminal" class="terminal-panel">
-            <!-- Right terminal output goes here -->
+            <h2>OSINT Tools Terminal</h2>
+            <div id="output-right" class="terminal-output"></div>
+            <input id="terminal-input-right" class="terminal-input" type="text" autocomplete="off" placeholder="Enter command..." />
         </section>
     </main>
 
-    <script src="{{ url_for('static', filename='js/main-left.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main-right.js') }}"></script>
+    <script src="main-left.js"></script>
+    <script src="main-right.js"></script>
 </body>
 </html>

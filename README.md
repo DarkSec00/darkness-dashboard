@@ -11,32 +11,46 @@ Tested on: Ubuntu 22.04+ / Debian-based distros
 ### 1. Install system dependencies
 
 ```bash
+
 sudo apt update && sudo apt install -y python3 python3-pip python3-venv nginx git
 
-Clone and enter the project
+### 2. Clone and enter the project
+
+```bash
 
 git clone https://github.com/YOUR_USERNAME/darkness-dashboard.git
 cd darkness-dashboard
 
-Create Python virtual environmen
+### 3.Create Python virtual environmen
+
+```bash
 
 python3 -m venv venv
 source venv/bin/activate
 
-Install Python dependencies
+### 4.Install Python dependencies
+
+```bash
 
 pip install -r requirements.txt
 
- (Optional) Configure .env file
+###5.(Optional) Configure .env file
 
 Copy the sample and edit:
+
+```bash
+
 cp .env.sample .env
 
-Run the app (development mode)
+###6.Run the app (development mode)
+
+```bash
 
 python app.py
 
 Or deploy with Gunicorn & Nginx for production (see below).
+
+---
 
 🌐 Nginx Sample Configuration
 
@@ -91,14 +105,18 @@ echo "   - Launch the app (dev mode): python app.py"
 echo ""
 echo "⚠️ For production use, configure Gunicorn + Nginx with the nginx.conf.sample."
 
-requirements.tx
+---
+
+###3. requirements.txt
 
 Flask==2.3.3
 requests
 
 (Only list the Python packages required by your application — no CLI tools, no setup instructions.)
 
-nginx.conf.sample
+---
+
+###4. nginx.conf.sample
 
 # Darkness Dashboard Nginx Sample Config
 
@@ -120,27 +138,17 @@ server {
 
 (Change dashboard.example.com to your actual subdomain
 
-.env.sample
+---
+
+###5. .env.sample
 
 # Darkness Dashboard Environment Variables
+
+```env
 
 FLASK_SECRET_KEY=changeme123
 ENABLE_LOGGING=true
 
-# Darkness Dashboard Environment Variables
-
-FLASK_SECRET_KEY=changeme123
-ENABLE_LOGGING=true
-
-# Darkness Dashboard Environment Variables
-
-FLASK_SECRET_KEY=changeme123
-ENABLE_LOGGING=true
-
-# Darkness Dashboard Environment Variables
-
-FLASK_SECRET_KEY=changeme123
-ENABLE_LOGGING=true
-
+# Darkness Dashboard 
 Encurage users to copy this to .env and customize as needed
 

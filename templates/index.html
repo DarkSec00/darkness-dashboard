@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Darkness Security Dashboard</title>
-    <style>
-        body {
-            background-color: black;
-            color: #00ff00;
-            font-family: monospace;
-            text-align: center;
-            padding-top: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-    <h1>☠️ Darkness Security Dashboard ☠️</h1>
-    <p>Welcome, Agent of Darkness.</p>
+    <header class="header-bar">
+        <div class="logo">🌑</div>
+        <h1 class="title">Darkness Security Dashboard</h1>
+    </header>
+
+    <main class="dashboard-container">
+        <section id="left-terminal" class="terminal-panel">
+            <!-- Left terminal output goes here -->
+        </section>
+
+        <section id="center-dashboard" class="dashboard-panel">
+            <!-- Main dashboard content / charts / info -->
+            <h2>Welcome, Agent of Darkness</h2>
+            <p>Your tactical OSINT and security control hub.</p>
+        </section>
+
+        <section id="right-terminal" class="terminal-panel">
+            <!-- Right terminal output goes here -->
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main-left.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main-right.js') }}"></script>
 </body>
 </html>

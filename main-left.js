@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       const cmd = input.value.trim();
+      if (!cmd) return;
       write("> " + cmd);
       input.value = "";
-      // You can connect to server or just mock for now
+      // Mock response — replace this with real API call if needed
       write(`[mock] Command '${cmd}' executed`);
     }
   });

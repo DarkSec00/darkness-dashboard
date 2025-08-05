@@ -1,19 +1,72 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #0d0d0d;
-    color: #33ff33;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 20px;
-}
-
-h1 {
+    background-color: #000000;
     color: #00ff00;
-    text-shadow: 0 0 10px #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-.card {
-    background-color: #1a1a1a;
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #33ff33;
-    border-radius: 5px;
+.header-bar {
+    background: #003300;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid #00ff00;
+}
+
+.logo {
+    font-size: 1.8rem;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.dashboard-container {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 2rem;
+}
+
+.terminal-panel {
+    background-color: #001100;
+    border: 1px solid #00ff00;
+    border-radius: 4px;
+    width: 25%;
+    height: 100%;
+    padding: 1rem;
+    overflow-y: auto;
+    box-shadow: 0 0 8px #00ff00;
+}
+
+.dashboard-panel {
+    background-color: #002200;
+    border: 1px solid #00ff00;
+    border-radius: 4px;
+    flex-grow: 1;
+    height: 100%;
+    padding: 1rem 2rem;
+    overflow-y: auto;
+    box-shadow: 0 0 12px #00ff00;
+}
+
+h2 {
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.5;
 }

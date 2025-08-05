@@ -14,9 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       const cmd = input.value.trim();
+      if (!cmd) return;
       write("> " + cmd);
       input.value = "";
-      write(`[mock] Executing OSINT command: '${cmd}'`);
+      // Mock response — replace with real API call if desired
+      write(`[mock] Command '${cmd}' executed`);
     }
   });
 });

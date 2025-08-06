@@ -1,0 +1,19 @@
+version: '3'
+services:
+  terminal-center:
+    build: .
+    command: ttyd -p 7681 bash
+    ports:
+      - "7681:7681"
+
+  terminal-left:
+    build: .
+    command: ttyd -p 7682 bash -c "cd ~/recon_tools && ./wifi_tools_menu.sh"
+    ports:
+      - "7682:7682"
+
+  terminal-right:
+    build: .
+    command: ttyd -p 7683 bash -c "cd ~/recon_tools && ./osint_menu.sh"
+    ports:
+      - "7683:7683"

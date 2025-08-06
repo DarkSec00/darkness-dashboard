@@ -1,32 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Darkness Security Dashboard</title>
-    <link rel="stylesheet" href="static/css/style.css" />
+  <meta charset="UTF-8">
+  <title>Darkness Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/xterm@5/lib/xterm.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5/css/xterm.css">
 </head>
 <body>
-    <header>
-        <h1>☠️ Darkness Security Dashboard ☠️</h1>
-        <p>Welcome, Agent of Darkness.</p>
-    </header>
-
-    <main>
-        <section id="left-terminal" class="terminal-panel">
-            <h2>WiFi Tools Terminal</h2>
-            <div id="output-left" class="terminal-output"></div>
-            <input id="terminal-input-left" class="terminal-input" type="text" autocomplete="off" placeholder="Enter command..." />
-        </section>
-
-        <section id="right-terminal" class="terminal-panel">
-            <h2>OSINT Tools Terminal</h2>
-            <div id="output-right" class="terminal-output"></div>
-            <input id="terminal-input-right" class="terminal-input" type="text" autocomplete="off" placeholder="Enter command..." />
-        </section>
-    </main>
-
-    <script src="main-left.js"></script>
-    <script src="main-right.js"></script>
+  <div class="logo"><h1>DARKNESS SECURITY</h1></div>
+  <div class="terminals">
+    <div id="term-left" class="terminal-container"></div>
+    <div id="term-center" class="terminal-container"></div>
+    <div id="term-right" class="terminal-container"></div>
+  </div>
+  <script src="{{ url_for('static', filename='main-left.js') }}"></script>
+  <script src="{{ url_for('static', filename='main-center.js') }}"></script>
+  <script src="{{ url_for('static', filename='main-right.js') }}"></script>
 </body>
 </html>
